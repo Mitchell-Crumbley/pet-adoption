@@ -233,6 +233,7 @@ const petBuilder = (taco) => {
         <p class="card-text">${taco[i].color}</p>
         <p class="card-text">${taco[i].specialSkill}</p>
         <div class="card-footer text-muted">${taco[i].type}</div>
+        <button type="button" class="btn btn-danger">Delete</button>
       </div>`;
   }
 
@@ -258,6 +259,16 @@ const handleButtonClick = (e) => {
   }
 
 };
+const deletePets = (e) => {
+  const targetType = e.target.type;
+  const targetId = e.target.id;
+
+  if (targetType === 'button') {
+    pets.splice(targetId, 1);
+  }
+  //Runs the pieBuilder function to update the DOM after splicing the targetedId to deleted. TLDR makes delete button delete from the DOM.
+  petBuilder(pets);
+}
 
 
 
@@ -266,6 +277,7 @@ const buttonEvents = () => {
   document.querySelector('#cat').addEventListener('click', handleButtonClick);
   document.querySelector('#dog').addEventListener('click', handleButtonClick);
   document.querySelector('#dino').addEventListener('click', handleButtonClick);
+  document.querySelector('#pet-card-container').addEventListener('click', deletePets);
 
 };
 
